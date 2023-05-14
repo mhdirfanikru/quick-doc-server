@@ -14,19 +14,19 @@ import http from 'http';
 import { Server } from 'socket.io'
 
 const app=express();
+dotenv.config();
 
 
-
-const appServer = http.createServer(app);
-const io = new Server(appServer, 
-  {cors: {origin: ["https://quickdoc.online","https://www.quickdoc.online"]}}
+const server = http.createServer(app);
+const io = new Server(server, 
+  {cors: {origin: ["https://quickdoc.online","https://www.quickdoc.online","https://quick-doc-client.vercel.app/"]}}
 );
 // cors: {
 //   origin: "https://www.quickdoc.online"
 // },
 // const io = new Server(appServer,) 
 
-dotenv.config();
+
 app.use(cors({
   origin: '*',
   optionsSuccessStatus: 200
