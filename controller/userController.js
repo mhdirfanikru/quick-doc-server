@@ -343,18 +343,19 @@ export const activeSession = async (req, res) => {
   // const currentISODate = new Date();
   // //  currentISODate.setHours(currentISODate.getHours())+1;
   // currentISODate.setHours(currentISODate.getHours());
-  
+
   const currentISODate = new Date();
   currentISODate.setHours(currentISODate.getHours() + 5);
   currentISODate.setMinutes(currentISODate.getMinutes() + 30);
   console.log(currentISODate);
-
+console.log(userId);
   try {
     const session = await Session.findOne({
       userId: req.params.id,
       startTime: { $lte: currentISODate },
       endTime: { $gte: currentISODate },
     });
+    console.log(session);
     res.json(session);
   } catch (err) {
     res.status(400).json({ error: err });
