@@ -340,9 +340,14 @@ export const session = async (req, res) => {
 };
 
 export const activeSession = async (req, res) => {
+  // const currentISODate = new Date();
+  // //  currentISODate.setHours(currentISODate.getHours())+1;
+  // currentISODate.setHours(currentISODate.getHours());
+  
   const currentISODate = new Date();
-  //  currentISODate.setHours(currentISODate.getHours())+1;
-  currentISODate.setHours(currentISODate.getHours());
+  currentISODate.setHours(currentISODate.getHours() + 5);
+  currentISODate.setMinutes(currentISODate.getMinutes() + 30);
+  console.log(currentISODate);
 
   try {
     const session = await Session.findOne({
