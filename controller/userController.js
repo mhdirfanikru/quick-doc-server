@@ -348,13 +348,14 @@ export const activeSession = async (req, res) => {
   currentISODate.setHours(currentISODate.getHours() + 5);
   currentISODate.setMinutes(currentISODate.getMinutes() + 30);
   console.log(currentISODate);
-console.log(userId);
+
   try {
     const session = await Session.findOne({
       userId: req.params.id,
       startTime: { $lte: currentISODate },
       endTime: { $gte: currentISODate },
     });
+    console.log(req.params.id);
     console.log(session);
     res.json(session);
   } catch (err) {
