@@ -183,9 +183,35 @@ export const session = async (req, res) => {
 
 export const activeSession = async (req, res) => {
   // const currentISODate = new Date();
-  // currentISODate.setHours(currentISODate.getHours());
+  // currentISODate.setHours(currentISODate.getHours()-2);
   const currentISODate = new Date();
-  currentISODate.setHours(currentISODate.getHours() + 5);
+  currentISODate.setHours(currentISODate.getHours() +3);
+  currentISODate.setMinutes(currentISODate.getMinutes() + 30);
+// console.log(currentISODate);
+  try {
+    const session = await Session.findOne({
+      doctorId: req.params.id,
+      startTime: { $lte: currentISODate },
+      endTime: { $gte: currentISODate },
+    });
+ 
+
+    if (session) {
+      console.log(session);
+      res.json(session);
+    } else {
+      console.log('sdsd');
+      res.json("no session");
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: err });
+  }
+};
+
+export const setLink = async (req, res) => {
+  const currentISODate = new Date();
+  currentISODate.setHours(currentISODate.getHours() +3);
   currentISODate.setMinutes(currentISODate.getMinutes() + 30);
 
   try {
@@ -194,28 +220,7 @@ export const activeSession = async (req, res) => {
       startTime: { $lte: currentISODate },
       endTime: { $gte: currentISODate },
     });
-
-    if (session) {
-      res.json(session);
-    } else {
-      res.json("no session");
-    }
-  } catch (err) {
-    res.status(500).json({ error: err });
-  }
-};
-
-export const setLink = async (req, res) => {
-  const currentISODate = new Date();
-  currentISODate.setHours(currentISODate.getHours());
-
-  try {
-    const session = await Session.findOne({
-      doctorId: req.params.id,
-      startTime: { $lte: currentISODate },
-      endTime: { $gte: currentISODate },
-    });
-
+console.log(session);
     if (session) {
       const data = req.body.data;
       await session.updateOne({
