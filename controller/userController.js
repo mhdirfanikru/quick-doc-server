@@ -345,7 +345,7 @@ export const activeSession = async (req, res) => {
   // currentISODate.setHours(currentISODate.getHours()-2);
 
   const currentISODate = new Date();
-  currentISODate.setHours(currentISODate.getHours() + 3);
+  currentISODate.setHours(currentISODate.getHours() + 6);
   currentISODate.setMinutes(currentISODate.getMinutes() + 30);
  // console.log(currentISODate);
 
