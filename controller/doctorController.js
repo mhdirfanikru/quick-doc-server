@@ -185,33 +185,27 @@ export const activeSession = async (req, res) => {
   // const currentISODate = new Date();
   // currentISODate.setHours(currentISODate.getHours()-2);
   const currentISODate = new Date();
-  currentISODate.setHours(currentISODate.getHours() +6);
+  currentISODate.setHours(currentISODate.getHours() +5);
   currentISODate.setMinutes(currentISODate.getMinutes() + 30);
-  console.log(currentISODate);
   try {
     const session = await Session.findOne({
       doctorId: req.params.id,
       startTime: { $lte: currentISODate },
       endTime: { $gte: currentISODate },
     });
- 
-
     if (session) {
-      console.log(session);
       res.json(session);
     } else {
-      console.log('sdsd');
       res.json("no session");
     }
   } catch (err) {
-    console.log(err);
     res.status(500).json({ error: err });
   }
 };
 
 export const setLink = async (req, res) => {
   const currentISODate = new Date();
-  currentISODate.setHours(currentISODate.getHours() +6);
+  currentISODate.setHours(currentISODate.getHours() +5);
   currentISODate.setMinutes(currentISODate.getMinutes() + 30);
 
   try {

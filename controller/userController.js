@@ -345,7 +345,7 @@ export const activeSession = async (req, res) => {
   // currentISODate.setHours(currentISODate.getHours()-2);
 
   const currentISODate = new Date();
-  currentISODate.setHours(currentISODate.getHours() + 6);
+  currentISODate.setHours(currentISODate.getHours() + 5);
   currentISODate.setMinutes(currentISODate.getMinutes() + 30);
  // console.log(currentISODate);
 
@@ -355,8 +355,6 @@ export const activeSession = async (req, res) => {
       startTime: { $lte: currentISODate },
       endTime: { $gte: currentISODate },
     });
-    console.log(req.params.id);
-    console.log(session);
     res.json(session);
   } catch (err) {
     res.status(400).json({ error: err });
