@@ -23,7 +23,7 @@ router.put("/updatePassword/:id",verifyToken,isBlocked,updatePassword);
 
 router.put("/updateUserImage/:id",upload.single('image'),verifyToken,isBlocked,updateProfileImage);
 
-router.get("/getDoctor/:id",isBlocked,getDoctor)
+router.get("/getDoctor/:id",verifyToken,isBlocked,getDoctor)
 
 router.post('/book_session',verifyToken,isBlocked,bookSession);
 
