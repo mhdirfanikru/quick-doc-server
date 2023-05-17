@@ -155,7 +155,6 @@ export const updatePassword = async (req, res) => {
 
 export const updateProfileImage = async (req, res) => {
   try {
-    console.log("dsdfdsf");
     const result = await cloudinary.uploader.upload(req.file.path);
     const user = await Doctor.findByIdAndUpdate(req.params.id, {
       $set: {
@@ -214,7 +213,6 @@ export const setLink = async (req, res) => {
       startTime: { $lte: currentISODate },
       endTime: { $gte: currentISODate },
     });
-console.log(session);
     if (session) {
       const data = req.body.data;
       await session.updateOne({

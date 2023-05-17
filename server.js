@@ -52,7 +52,6 @@ app.get('*',(req,res)=>{
 try {
     
 let users = [];
-console.log(users);
 const addUser = (userId, socketId) => {
   !users.some((user) => user.userId == userId) &&
     users.push({ userId, socketId });
@@ -63,13 +62,11 @@ const removeUser = (socketId) => {
 };
 
 const getUser = (userId) => {
-  console.log(users);
   return users.find((user) => user.userId === userId);
 };
 
 io.on("connection", (socket) => {
   //when connect
-  console.log("socket connected");
 
   //take userId and socketId from user
   socket.on("addUser", (userId) => {
@@ -77,21 +74,20 @@ io.on("connection", (socket) => {
       addUser(userId, socket.id);
       io.emit("getUsers", users);
     } catch (error) {
-      console.log(error);
+        res.json("something went wrong")
     }
   });
 
   //send and get messages
   socket.on("sendMessage", ({ senderId, recieverId, text }) => {
     try {
-      console.log(senderId, recieverId, text);
       const user = getUser(recieverId);
       io.to(user.socketId).emit("getMessage", {
         senderId,
         text,
       });
     } catch (error) {
-      console.log(error);
+      res.json("something went wrong")
     }
   });
 
@@ -101,13 +97,13 @@ io.on("connection", (socket) => {
       removeUser(socket.id);
       io.emit("getUsers", users);
     } catch (error) {
-      console.log(error);
+      res.json("something went wrong")
     }
   });
 });
 
 } catch (error) {
-    console.log(`error - ${error.message}`)
+  res.json("something went wrong")
 }
 
 dbConnection().then(()=>{
