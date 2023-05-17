@@ -7,7 +7,7 @@ const connectDb = async () => {
       useUnifiedTopology: true,
     });
   } catch (error) {
-    res.json(error)
+    console.error(error);
   }
 };
 
