@@ -74,7 +74,7 @@ io.on("connection", (socket) => {
       addUser(userId, socket.id);
       io.emit("getUsers", users);
     } catch (error) {
-        res.json("something went wrong")
+      console.log("something went wrong");
     }
   });
 
