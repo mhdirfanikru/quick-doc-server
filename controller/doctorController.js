@@ -1,4 +1,5 @@
 import Doctor from "../model/doctor.js";
+import User from "../model/user.js"
 import Session from "../model/session.js";
 import Appointment from "../model/appointment.js";
 import bcrypt from "bcrypt";
