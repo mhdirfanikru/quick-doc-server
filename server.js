@@ -87,7 +87,8 @@ io.on("connection", (socket) => {
         text,
       });
     } catch (error) {
-      res.json("something went wrong")
+      // res.json("something went wrong")
+      console.log("something went wrong");
     }
   });
 
@@ -97,13 +98,15 @@ io.on("connection", (socket) => {
       removeUser(socket.id);
       io.emit("getUsers", users);
     } catch (error) {
-      res.json("something went wrong")
+      console.log("something went wrong");
+      // res.json("something went wrong")
     }
   });
 });
 
 } catch (error) {
-  res.json("something went wrong")
+  console.log("something went wrong");
+  // res.json("something went wrong")
 }
 
 dbConnection().then(()=>{
